@@ -7,19 +7,21 @@ model.init({
         primaryKey: true,
         autoIncrement: true
     },
-    kategori_id: Sequelize.INTEGER,
     stok: Sequelize.STRING,
+    sinopsis:Sequelize.STRING,
+    kategori_id: Sequelize.INTEGER,
     title: Sequelize.STRING,
     harga: Sequelize.INTEGER,
-    author: Sequelize.INTEGER,
-    image_url: Sequelize.STRING,
-    no_isbn: Sequelize.STRING,
-    berat: Sequelize.INTEGER,
     deskripsi: Sequelize.STRING,
+    author: Sequelize.STRING,
     created_at: Sequelize.DATE,
     updated_at: Sequelize.DATE,
     deleted_at: Sequelize.DATE,
-    sinopsis:Sequelize.STRING,
+    image_url: Sequelize.STRING,
+    no_isbn: Sequelize.STRING,
+    berat: Sequelize.INTEGER,
+   
+    
 }, {
     createdAt: 'created_at',
     updatedAt: 'updated_at',

@@ -5,7 +5,7 @@ const model = require('../model');
 const create = async (req, res) => {
     try {
         console.log(req.file)
-        const params = { ...req.body, ...{ image_url: req.file.path } }
+        const params = { ...req.body }
         console.log(params)
         //const params = (req.body);
         const data = await buku.create(params)
@@ -15,6 +15,7 @@ const create = async (req, res) => {
             data,
         });
     } catch (err) {
+        console.log(err)
         return res.status(400).send({
             message: err.message,
         })
@@ -142,6 +143,7 @@ const get_list = async (req, res) => {
 
             return res.status(200).send({
                 message: 'ok',
+                hallo: "ok halo juga",
                 data,
             });
         } catch (err) {

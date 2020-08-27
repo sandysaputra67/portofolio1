@@ -7,7 +7,7 @@ const path = require('path')
 //const upload = multer({ dest: 'uploads/'});//
 const middleware = require('./config/authMiddleware.js');
 const app = express()
-const port = 3000
+const port = 3003
 const {
     users,
     kategori,
@@ -35,7 +35,6 @@ const storage = multer.diskStorage({
         }
     }
   });
-  const upload = multer({ storage });
 
 const imageFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
@@ -45,22 +44,25 @@ const imageFilter = (req, file, cb) => {
     }
 };
 
-// //const upload = multer({
-//     storage: storage,//
-//     limits: {
-//         fileSize: 1024 * 1024 * 5,
-//     },
+const upload = multer({
+   storage: storage,
+     limits: {
+      fileSize: 1024 * 1024 * 5,
+     },
 //     fileFilter: imageFilter
-// });//
+ });
 
-//const uploadAsync = util.promisify(upload.single('image_url'));//
+const uploadAsync = util.promisify(upload.single('image_url'));
+
 
 app.use(cors())
-app.get('/buku', buku.get_list);
-app.post('/buku', middleware.userAuth,middleware.checkRole, upload.single('images'), buku.create);
-app.get('/buku/:id', buku.get_by_id);
-app.put('/buku/:id', middleware.userAuth,middleware.checkRole, buku.update_by_id); 
-app.delete('/buku/:id', middleware.userAuth,middleware.checkRole, buku.delete_by_id); 
+app.get('/books', buku.get_list);
+app.post('/books', middleware.userAuth,middleware.checkRole,  buku.create);
+app.get('/books/:id', buku.get_by_id);
+app.put('/books/:id', middleware.userAuth,middleware.checkRole, buku.update_by_id); 
+app.delete('/books/:id', middleware.userAuth,middleware.checkRole, buku.delete_by_id); 
+
+
 
 app.get('/', (req, res) => res.send('hello!'))
 app.post('/register', users.register);
